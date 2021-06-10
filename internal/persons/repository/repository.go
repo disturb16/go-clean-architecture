@@ -4,10 +4,10 @@ import (
 	"context"
 	"errors"
 
-	"github.com/disturb16/go-clean-architecture/internal/persons"
-	"github.com/disturb16/go-clean-architecture/internal/persons/repository/mysql"
-	"github.com/disturb16/go-clean-architecture/internal/persons/repository/sqlite"
-	"github.com/disturb16/go-clean-architecture/settings"
+	"github.com/disturb16/go-sqlite-service/internal/persons"
+	"github.com/disturb16/go-sqlite-service/internal/persons/repository/mysql"
+	"github.com/disturb16/go-sqlite-service/internal/persons/repository/sqlite"
+	"github.com/disturb16/go-sqlite-service/settings"
 	"github.com/jmoiron/sqlx"
 
 	_ "github.com/mattn/go-sqlite3"

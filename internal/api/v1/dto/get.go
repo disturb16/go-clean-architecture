@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/disturb16/go-clean-architecture/internal/persons/entity"
+import "github.com/disturb16/go-sqlite-service/internal/persons/entity"
 
 // disclaimer: there are non-ok json tag values for some of the *RQ structs, because they are in path or somewhere else, so it is not actual json
 

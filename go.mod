@@ -1,4 +1,4 @@
-module github.com/disturb16/go-clean-architecture
+module github.com/disturb16/go-sqlite-service
 
 go 1.16
 

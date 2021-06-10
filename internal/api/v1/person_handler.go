@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/disturb16/go-clean-architecture/internal/api/v1/dto"
+	"github.com/disturb16/go-sqlite-service/internal/api/v1/dto"
 	"github.com/labstack/echo/v4"
 	"github.com/sanservices/apicore/helper"
 	"github.com/sanservices/apilogger/v2"

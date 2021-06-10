@@ -3,7 +3,7 @@ package persons
 import (
 	"context"
 
-	"github.com/disturb16/go-clean-architecture/internal/persons/entity"
+	"github.com/disturb16/go-sqlite-service/internal/persons/entity"
 )
 
 // Service declares and summarizes the functionality a

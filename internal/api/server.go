@@ -1,11 +1,10 @@
 package api
 
 import (
+	"github.com/disturb16/go-sqlite-service/settings"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/gommon/log"
 	"go.uber.org/fx"
-
-	"github.com/disturb16/go-clean-architecture/settings"
 )
 
 // NewServer creates new echo server object and registers start and end of lifecycle of app

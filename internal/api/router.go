@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/disturb16/go-clean-architecture/settings"
+	"github.com/disturb16/go-sqlite-service/settings"
 	"github.com/labstack/echo/v4"
 	echoMW "github.com/labstack/echo/v4/middleware"
 	apicoreMW "github.com/sanservices/apicore/middleware"

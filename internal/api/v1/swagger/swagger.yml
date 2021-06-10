@@ -16,7 +16,7 @@ definitions:
         type: string
         x-go-name: Name
     type: object
-    x-go-package: github.com/disturb16/go-clean-architecture/internal/persons/entity
+    x-go-package: github.com/disturb16/go-sqlite-service/internal/persons/entity
   errorProperty:
     properties:
       constraints:
@@ -28,7 +28,7 @@ definitions:
         type: string
         x-go-name: Property
     type: object
-    x-go-package: github.com/disturb16/go-clean-architecture/internal/api/v1/dto
+    x-go-package: github.com/disturb16/go-sqlite-service/internal/api/v1/dto
 host: localhost:8080
 info:
   description: persons-service service

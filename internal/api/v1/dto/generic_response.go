@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/disturb16/go-clean-architecture/internal/persons/entity"
+import "github.com/disturb16/go-sqlite-service/internal/persons/entity"
 
 type errorProperty struct {
 	Property    string   `json:"property"`

@@ -3,10 +3,9 @@ package v1
 import (
 	"errors"
 
+	"github.com/disturb16/go-sqlite-service/internal/persons"
+	"github.com/disturb16/go-sqlite-service/settings"
 	validator2 "github.com/sanservices/apicore/validator"
-
-	"github.com/disturb16/go-clean-architecture/internal/persons"
-	"github.com/disturb16/go-clean-architecture/settings"
 )
 
 var errParametersNotValid = errors.New("one or more parameters are incorrectly formatted")

@@ -5,11 +5,10 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/disturb16/go-sqlite-service/settings"
 	"github.com/jmoiron/sqlx"
 
 	_ "github.com/mattn/go-sqlite3"
-
-	"github.com/disturb16/go-clean-architecture/settings"
 )
 
 var (

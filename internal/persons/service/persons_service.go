@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/disturb16/go-clean-architecture/internal/persons/entity"
+	"github.com/disturb16/go-sqlite-service/internal/persons/entity"
 )
 
 var errNameEmpty = errors.New("name is empty")

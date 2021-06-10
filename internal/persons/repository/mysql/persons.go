@@ -3,7 +3,7 @@ package mysql
 import (
 	"context"
 
-	"github.com/disturb16/go-clean-architecture/internal/persons/entity"
+	"github.com/disturb16/go-sqlite-service/internal/persons/entity"
 )
 
 func (m Mysql) Find(ctx context.Context, limit int) ([]entity.Person, error) {

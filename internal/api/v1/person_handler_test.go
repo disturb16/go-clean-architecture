@@ -8,10 +8,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/disturb16/go-clean-architecture/dbutils"
-	"github.com/disturb16/go-clean-architecture/internal/persons/repository"
-	"github.com/disturb16/go-clean-architecture/internal/persons/service"
-	"github.com/disturb16/go-clean-architecture/settings"
+	"github.com/disturb16/go-sqlite-service/dbutils"
+	"github.com/disturb16/go-sqlite-service/internal/persons/repository"
+	"github.com/disturb16/go-sqlite-service/internal/persons/service"
+	"github.com/disturb16/go-sqlite-service/settings"
 	"github.com/labstack/echo/v4"
 	"github.com/sanservices/apicore/validator"
 )

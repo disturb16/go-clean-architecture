@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/disturb16/go-clean-architecture/dbutils"
-	"github.com/disturb16/go-clean-architecture/internal/persons"
-	"github.com/disturb16/go-clean-architecture/internal/persons/repository"
-	"github.com/disturb16/go-clean-architecture/settings"
+	"github.com/disturb16/go-sqlite-service/dbutils"
+	"github.com/disturb16/go-sqlite-service/internal/persons"
+	"github.com/disturb16/go-sqlite-service/internal/persons/repository"
+	"github.com/disturb16/go-sqlite-service/settings"
 )
 
 var service persons.Service
