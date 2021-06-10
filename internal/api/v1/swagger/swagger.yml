@@ -1,0 +1,177 @@
+basePath: /v1
+consumes:
+- application/json
+definitions:
+  Person:
+    properties:
+      age:
+        format: int64
+        type: integer
+        x-go-name: Age
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      name:
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/disturb16/go-clean-architecture/internal/persons/entity
+  errorProperty:
+    properties:
+      constraints:
+        items:
+          type: string
+        type: array
+        x-go-name: Constraints
+      property:
+        type: string
+        x-go-name: Property
+    type: object
+    x-go-package: github.com/disturb16/go-clean-architecture/internal/api/v1/dto
+host: localhost:8080
+info:
+  description: persons-service service
+  version: "1.0"
+paths:
+  /persons:
+    get:
+      operationId: persons
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/personsSuccessResp'
+        "400":
+          $ref: '#/responses/badRequestErrorResp'
+        default:
+          $ref: '#/responses/genericErrorResp'
+      security:
+      - api_key: []
+      summary: Retreives all the persons.
+      tags:
+      - persons
+    post:
+      operationId: savePerson
+      parameters:
+      - in: body
+        name: Body
+        required: true
+        schema:
+          properties:
+            age:
+              format: int64
+              type: integer
+              x-go-name: Age
+            name:
+              type: string
+              x-go-name: Name
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          $ref: '#/responses/genericSuccessResp'
+        "400":
+          $ref: '#/responses/badRequestErrorResp'
+        default:
+          $ref: '#/responses/genericErrorResp'
+      security:
+      - api_key: []
+      summary: Registers a new person.
+      tags:
+      - persons
+  /persons/:id:
+    get:
+      operationId: person
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/personSuccessResp'
+        "400":
+          $ref: '#/responses/badRequestErrorResp'
+        default:
+          $ref: '#/responses/genericErrorResp'
+      security:
+      - api_key: []
+      summary: Retreives one person.
+      tags:
+      - persons
+produces:
+- application/json
+responses:
+  badRequestErrorResp:
+    description: Error in the request payload
+    schema:
+      properties:
+        errors:
+          items:
+            properties:
+              code:
+                type: string
+                x-go-name: Code
+              message:
+                type: string
+                x-go-name: Message
+            type: object
+          type: array
+          x-go-name: Errors
+      type: object
+  genericErrorResp:
+    description: Generic Error
+    schema:
+      properties:
+        errors:
+          items:
+            properties:
+              code:
+                type: string
+                x-go-name: Code
+              message:
+                type: string
+                x-go-name: Message
+              properties:
+                items:
+                  $ref: '#/definitions/errorProperty'
+                type: array
+                x-go-name: Properties
+            type: object
+          type: array
+          x-go-name: Errors
+      type: object
+  genericSuccessResp:
+    description: Generic success
+    schema:
+      properties:
+        data:
+          type: object
+          x-go-name: Data
+      type: object
+  personSuccessResp:
+    description: Representation of a person response
+    schema:
+      properties:
+        data:
+          $ref: '#/definitions/Person'
+      type: object
+  personsSuccessResp:
+    description: Representation of persons response
+    schema:
+      properties:
+        data:
+          items:
+            $ref: '#/definitions/Person'
+          type: array
+          x-go-name: Data
+      type: object
+schemes:
+- http
+security:
+- api_key: []
+securityDefinitions:
+  api_key:
+    in: header
+    name: api-key
+    type: apiKey
+swagger: "2.0"

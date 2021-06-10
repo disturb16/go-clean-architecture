@@ -1,0 +1,13 @@
+service:
+  name: "persons-service"
+  path_prefix: ""
+  version: "1"
+  debug: false
+  port: 8080
+database:
+  engine: "sqlite"
+  host: ""
+  name: "mytest"
+  port: 3306
+  user: ""
+  password: ""
