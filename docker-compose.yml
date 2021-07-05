@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:alpine3.13
+    networks:
+      - persons-cache
+    command: redis-server --appendonly yes
+
+  api:
+    image: persons:latest
+    ports:
+      - 8081:8080
+    networks:
+      - persons-cache
+    configs:
+      - source: settings
+        target: /app/settings.yml
+
+networks:
+  persons-cache:
+
+configs:
+  settings:
+    file: ./settings.yml

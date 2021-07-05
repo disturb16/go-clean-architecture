@@ -3,6 +3,7 @@ package sqlite
 import (
 	"context"
 	"database/sql"
+	"fmt"
 
 	"github.com/disturb16/go-sqlite-service/internal/persons/entity"
 )
@@ -28,10 +29,15 @@ func (sl Sqlite) Find(ctx context.Context, limit int) ([]entity.Person, error) {
 
 func (sl Sqlite) FindOne(ctx context.Context, id int64) (*entity.Person, error) {
 
-	const qry string = "SELECT id, name, age FROM persons WHERE id = $1"
 	p := &entity.Person{}
+	err := sl.cache.Get(ctx, fmt.Sprintf("%d", id), p)
+	if err == nil {
+		return p, nil
+	}
 
-	err := sl.db.GetContext(ctx, p, qry, id)
+	const qry string = "SELECT id, name, age FROM persons WHERE id = $1"
+
+	err = sl.db.GetContext(ctx, p, qry, id)
 
 	if err == sql.ErrNoRows {
 		return nil, nil
@@ -40,6 +46,8 @@ func (sl Sqlite) FindOne(ctx context.Context, id int64) (*entity.Person, error) 
 	if err != nil {
 		return nil, err
 	}
+
+	sl.cache.Set(ctx, fmt.Sprintf("%d", id), p)
 
 	return p, nil
 }

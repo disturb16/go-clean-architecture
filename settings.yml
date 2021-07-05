@@ -4,6 +4,7 @@ service:
   version: "1"
   debug: false
   port: 8080
+  cache_enabled: true
 database:
   engine: "sqlite"
   host: ""
@@ -11,3 +12,8 @@ database:
   port: 3306
   user: ""
   password: ""
+redis:
+  address: "redis"
+  port: 6379
+  db_index: 0
+  expiration_minutes: 10

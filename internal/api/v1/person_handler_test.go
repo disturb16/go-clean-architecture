@@ -10,6 +10,7 @@ import (
 
 	"github.com/disturb16/go-sqlite-service/dbutils"
 	"github.com/disturb16/go-sqlite-service/internal/persons/repository"
+	"github.com/disturb16/go-sqlite-service/internal/persons/repository/rediscache"
 	"github.com/disturb16/go-sqlite-service/internal/persons/service"
 	"github.com/disturb16/go-sqlite-service/settings"
 	"github.com/labstack/echo/v4"
@@ -35,7 +36,7 @@ func TestMain(m *testing.M) {
 
 	defer db.Close()
 
-	repo, err := repository.New(ctx, config, db)
+	repo, err := repository.New(ctx, config, db, &rediscache.Cache{})
 	if err != nil {
 		log.Panic(err)
 	}
@@ -61,6 +62,12 @@ func TestPersons(t *testing.T) {
 		{
 			Name:               "Should retrieve data",
 			Params:             map[string]string{"limit": "1"},
+			StatusCodeExpected: http.StatusOK,
+		},
+
+		{
+			Name:               "Should retrieve data",
+			Params:             map[string]string{"limit": "a"},
 			StatusCodeExpected: http.StatusOK,
 		},
 	}

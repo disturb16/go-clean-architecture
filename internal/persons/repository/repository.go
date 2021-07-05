@@ -6,6 +6,7 @@ import (
 
 	"github.com/disturb16/go-sqlite-service/internal/persons"
 	"github.com/disturb16/go-sqlite-service/internal/persons/repository/mysql"
+	"github.com/disturb16/go-sqlite-service/internal/persons/repository/rediscache"
 	"github.com/disturb16/go-sqlite-service/internal/persons/repository/sqlite"
 	"github.com/disturb16/go-sqlite-service/settings"
 	"github.com/jmoiron/sqlx"
@@ -14,7 +15,12 @@ import (
 )
 
 // New constructs the repository
-func New(ctx context.Context, cfg *settings.Settings, db *sqlx.DB) (persons.Repository, error) {
+func New(
+	ctx context.Context,
+	cfg *settings.Settings,
+	db *sqlx.DB,
+	redisCache *rediscache.Cache,
+) (persons.Repository, error) {
 
 	switch cfg.DB.Engine {
 	case "sqlite":
@@ -22,10 +28,10 @@ func New(ctx context.Context, cfg *settings.Settings, db *sqlx.DB) (persons.Repo
 		if err != nil {
 			return nil, err
 		}
-		return sqlite.New(db), nil
+		return sqlite.New(db, redisCache), nil
 
 	case "mysql":
-		return mysql.New(db), nil
+		return mysql.New(db, redisCache), nil
 
 	default:
 		err := errors.New("unsupported or missing database engine")

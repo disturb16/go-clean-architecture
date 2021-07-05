@@ -34,6 +34,7 @@ import (
 	v1 "github.com/disturb16/go-sqlite-service/internal/api/v1"
 	"github.com/disturb16/go-sqlite-service/internal/persons"
 	"github.com/disturb16/go-sqlite-service/internal/persons/repository"
+	"github.com/disturb16/go-sqlite-service/internal/persons/repository/rediscache"
 	"github.com/disturb16/go-sqlite-service/internal/persons/service"
 	"github.com/disturb16/go-sqlite-service/settings"
 	"github.com/jmoiron/sqlx"
@@ -58,6 +59,8 @@ func main() {
 			settings.New,
 
 			dbutils.New,
+
+			rediscache.New,
 
 			// Repo
 			repository.New,

@@ -2,6 +2,7 @@ package settings
 
 import (
 	"context"
+	"time"
 
 	logger "github.com/sanservices/apilogger/v2"
 	"github.com/spf13/viper"
@@ -15,14 +16,16 @@ const (
 type Settings struct {
 	Service service  `mapstructure:"service"`
 	DB      database `mapstructure:"database"`
+	Redis   redis    `mapstructure:"redis"`
 }
 
 type service struct {
-	Name       string `mapstructure:"service_name"`
-	PathPrefix string `mapstructure:"path_prefix"`
-	Version    string `mapstructure:"version"`
-	Port       int    `mapstructure:"port"`
-	Debug      bool   `mapstructure:"debug"`
+	Name         string `mapstructure:"service_name"`
+	PathPrefix   string `mapstructure:"path_prefix"`
+	Version      string `mapstructure:"version"`
+	Port         int    `mapstructure:"port"`
+	Debug        bool   `mapstructure:"debug"`
+	CacheEnabled bool   `mapstructure:"cache_enabled"`
 }
 
 type database struct {
@@ -32,6 +35,13 @@ type database struct {
 	Port     int    `mapstructure:"port"`
 	User     string `mapstructure:"user"`
 	Password string `mapstructure:"password"`
+}
+
+type redis struct {
+	Address           string        `yaml:"address"`
+	Port              int           `yaml:"port"`
+	DBIndex           int           `yaml:"db_index"`
+	ExpirationMinutes time.Duration `yaml:"expiration_minutes"`
 }
 
 // New Settings constructor

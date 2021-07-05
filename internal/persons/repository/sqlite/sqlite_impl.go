@@ -3,16 +3,19 @@ package sqlite
 import (
 	"context"
 
+	"github.com/disturb16/go-sqlite-service/internal/persons/repository/rediscache"
 	"github.com/jmoiron/sqlx"
 )
 
 type Sqlite struct {
-	db *sqlx.DB
+	db    *sqlx.DB
+	cache *rediscache.Cache
 }
 
-func New(db *sqlx.DB) (sl *Sqlite) {
+func New(db *sqlx.DB, redisCache *rediscache.Cache) (sl *Sqlite) {
 	return &Sqlite{
-		db: db,
+		db:    db,
+		cache: redisCache,
 	}
 }
 
