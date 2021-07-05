@@ -58,6 +58,7 @@ Dockerfile__ also, or what you have in developement won't match the other docker
         version: "1"
         debug: false
         port: 8080
+        cache_enabled: true
     database:
         engine: "sqlite"
         host: ""
@@ -65,6 +66,11 @@ Dockerfile__ also, or what you have in developement won't match the other docker
         port: 3306
         user: ""
         password: ""
+    redis:
+        address: "redis"
+        port: 6379
+        db_index: 0
+        expiration_minutes: 10
     ```
 
 4. Run the app by simply running the command:
