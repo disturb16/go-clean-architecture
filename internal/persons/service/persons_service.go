@@ -35,3 +35,7 @@ func (s Service) Persons(ctx context.Context, limit int) ([]entity.Person, error
 func (s Service) Person(ctx context.Context, id int64) (*entity.Person, error) {
 	return s.repo.FindOne(ctx, id)
 }
+
+func (s Service) UpdatePerson(ctx context.Context, p entity.Person) error {
+	return s.repo.UpdatePerson(ctx, p)
+}

@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/disturb16/go-sqlite-service/internal/api/v1/dto"
+	"github.com/disturb16/go-sqlite-service/internal/persons/entity"
 	"github.com/labstack/echo/v4"
 	"github.com/sanservices/apicore/helper"
 	"github.com/sanservices/apilogger/v2"
@@ -63,4 +64,36 @@ func (h Handler) savePerson(c echo.Context) error {
 	}
 
 	return c.NoContent(http.StatusCreated)
+}
+
+func (h Handler) updatePerson(c echo.Context) error {
+
+	ctx := c.Request().Context()
+	params := &dto.UpdateUserDto{}
+	idParam := c.Param("id")
+	id, err := strconv.ParseInt(idParam, 10, 64)
+
+	if err != nil || id < 1 {
+		respErr := errors.New("parameter id is not valid")
+		return helper.RespondError(c, http.StatusBadRequest, respErr)
+	}
+
+	err = helper.DecodeBody(c, &params.Body)
+	if err != nil {
+		apilogger.Error(c.Request().Context(), apilogger.LogCatUnmarshalReq, err)
+		return helper.RespondError(c, http.StatusBadRequest, errParametersNotValid)
+	}
+
+	p := entity.Person{
+		ID:   id,
+		Name: params.Body.Name,
+		Age:  params.Body.Age,
+	}
+
+	err = h.service.UpdatePerson(ctx, p)
+	if err != nil {
+		return helper.RespondError(c, http.StatusInternalServerError, err)
+	}
+
+	return c.NoContent(http.StatusNoContent)
 }

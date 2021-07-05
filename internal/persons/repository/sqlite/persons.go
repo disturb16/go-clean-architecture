@@ -69,3 +69,13 @@ func (sl Sqlite) SavePerson(ctx context.Context, person entity.Person) (int64, e
 
 	return insertedId, nil
 }
+
+func (sl Sqlite) UpdatePerson(ctx context.Context, person entity.Person) error {
+
+	const qry = "UPDATE persons SET name = :name, age = :age WHERE id = :id"
+
+	_, err := sl.db.NamedExecContext(ctx, qry, person)
+
+	sl.cache.Delete(ctx, fmt.Sprintf("%d", person.ID))
+	return err
+}

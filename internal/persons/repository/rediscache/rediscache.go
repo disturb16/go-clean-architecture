@@ -62,6 +62,14 @@ func (rc Cache) Get(ctx context.Context, key string, v interface{}) error {
 	return json.Unmarshal([]byte(val), v)
 }
 
+func (rc Cache) Delete(ctx context.Context, key string) error {
+	if !rc.enabled {
+		return nil
+	}
+
+	return rc.client.Del(ctx, key).Err()
+}
+
 func (rc Cache) Close() error {
 	if !rc.enabled {
 		return nil

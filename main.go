@@ -94,7 +94,7 @@ func main() {
 	app.Run()
 }
 
-func provideLifeCycleHooks(lc fx.Lifecycle, e *echo.Echo, cfg *settings.Settings, db *sqlx.DB) {
+func provideLifeCycleHooks(lc fx.Lifecycle, e *echo.Echo, cfg *settings.Settings, db *sqlx.DB, cache *rediscache.Cache) {
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 
@@ -112,6 +112,9 @@ func provideLifeCycleHooks(lc fx.Lifecycle, e *echo.Echo, cfg *settings.Settings
 		OnStop: func(ctx context.Context) error {
 			logger.Info(ctx, logger.LogCatDebug, "Closing database...")
 			db.Close()
+
+			logger.Info(ctx, logger.LogCatDebug, "Closing cache...")
+			cache.Close()
 
 			logger.Info(ctx, logger.LogCatDebug, "Server is shutting down...")
 			return e.Shutdown(ctx)

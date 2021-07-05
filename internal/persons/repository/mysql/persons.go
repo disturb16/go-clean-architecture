@@ -17,3 +17,7 @@ func (m Mysql) FindOne(ctx context.Context, id int64) (*entity.Person, error) {
 func (m Mysql) SavePerson(ctx context.Context, person entity.Person) (int64, error) {
 	return -1, nil
 }
+
+func (m Mysql) UpdatePerson(ctx context.Context, person entity.Person) error {
+	return nil
+}
